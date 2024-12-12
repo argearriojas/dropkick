@@ -1,0 +1,65 @@
+[build-system]
+requires = [
+    "scikit-build-core>=0.7.0",
+    "setuptools>=64",
+    "wheel",
+    "numpy<2",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "dropkick"
+version = "1.2.8+dev"
+description = "Automated scRNA-seq filtering"
+readme = "README.rst"
+requires-python = ">=3.6"
+license = { text = "MIT" }
+authors = [
+    { name = "Cody Heiser", email = "codyheiser49@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy<2",
+    "scipy",
+    "pandas",
+    "scikit-learn>=0.18.0",
+    "scikit-image",
+    "matplotlib>=3.0.3",
+    "scanpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "toml",
+]
+
+[project.urls]
+Homepage = "https://github.com/KenLauLab/dropkick"
+
+[project.scripts]
+dropkick = "dropkick.__main__:main"
+
+[tool.scikit-build]
+cmake.version = ">=3.15"
+ninja.version = ">=1.10"
+build-dir = "build/{wheel_tag}"
+build.verbose = true
+
+[tool.scikit-build.cmake.define]
+CMAKE_POSITION_INDEPENDENT_CODE = "ON"
+
+[tool.versioneer]
+VCS = "git"
+style = "pep440"
+versionfile_source = "dropkick/_version.py"
+versionfile_build = "dropkick/_version.py"
+tag_prefix = ""
+parentdir_prefix = "dropkick-"
+

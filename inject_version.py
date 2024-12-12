@@ -1,18 +1,21 @@
 import versioneer
-import toml
+import re
 
 # Get the current version from Versioneer
 version = versioneer.get_version()
 
-# Load the pyproject.toml file
+# Read the file content
 with open("pyproject.toml", "r") as f:
-    pyproject = toml.load(f)
+    content = f.read()
 
-# Update the version in the [project] section
-pyproject["project"]["version"] = version
+# Replace only the version in the [project] section
+# Look for version after [project] section and before the next section
+pattern = r'(\[project\][^\[]*version\s*=\s*)["\'].*?["\']'
+replacement = f'\\1"{version}"'
+new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
 
-# Write the updated pyproject.toml file
+# Write back to file
 with open("pyproject.toml", "w") as f:
-    toml.dump(pyproject, f)
+    f.write(new_content)
 
 print(f"Updated pyproject.toml with version: {version}")

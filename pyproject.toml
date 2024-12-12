@@ -9,7 +9,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "dropkick"
-version = "1.2.8+dev"
+version = "1.2.8+3.ge7be676"
 description = "Automated scRNA-seq filtering"
 readme = "README.rst"
 requires-python = ">=3.6"
